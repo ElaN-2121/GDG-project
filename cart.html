@@ -22,17 +22,18 @@
         <main>
             <section id="cart-items">
                 <h2>Items in Your Cart</h2>
-
-            <!-- Placeholder cart item -->
-                <div class="cart-item">
-                    <img src="img/dress.jpg" alt="Product Image">
-                    <div class="item-details">
-                        <h3>Summer Dress</h3>
-                        <p>Price: $25</p>
-                        <p>Quantity: 1</p>
-                        <button class="remove-btn">Remove</button>
-                    </div>
+                <div class="cart-item"></div>
+            </section>
+            <div id="checkout-modal" class="modal">
+                <div class="modal-content">
+                    <h2>🎉 Purchase Confirmed!</h2>
+                    <p>Thank you for shopping with Sheqerqer!</p>
+                    <button id="close-modal">Close</button>
                 </div>
+            </div>
+            <section id="purchase-history">
+                <h2>Purchase History</h2>
+                <div class="history-items"></div>
             </section>
         </main>
 
@@ -40,6 +41,7 @@
             <p>&copy; 2025 Sheqerqer</p>
         </footer>
     </div>
+    <audio id="checkout-sound" src="sounds/checkout.mp3" preload="auto"></audio>
     <script src="script.js"></script>
 </body>
 </html>
