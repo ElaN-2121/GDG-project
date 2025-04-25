@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert(`Item added to cart! 🛒`);
         });
     });
+
     const container = document.getElementById("cart-items");
     if (container) {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -49,16 +50,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
             document.querySelector(".checkout-btn").addEventListener("click", function () {
                 const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
 
                 if (cart.length > 0) {
-                    const history = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
                     const now = new Date();
-                    history.push({
+                    const purchaseData = {
                         items: cart,
                         date: now.toLocaleString(),
-                        total: cart.reduce((sum, item) => sum + item.price, 0)
-                    });
-                    localStorage.setItem("purchaseHistory", JSON.stringify(history));
+                        total: total,
+                    };
+
+                    // Send checkout request to the backend
+                    fetch('http://localhost:5000/api/checkout', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(purchaseData),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Purchase successful:', data);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
                 }
 
                 const modal = document.getElementById("checkout-modal");
@@ -82,28 +98,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const historyContainer = document.querySelector(".history-items");
     if (historyContainer) {
-        const history = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+        fetch('http://localhost:5000/api/purchases')
+            .then(response => response.json())
+            .then(history => {
+                if (history.length === 0) {
+                    historyContainer.innerHTML = "<p>No past purchases yet 🕰️</p>";
+                } else {
+                    history.forEach((record) => {
+                        const entry = document.createElement("div");
+                        entry.className = "history-record";
 
-        if (history.length === 0) {
-            historyContainer.innerHTML = "<p>No past purchases yet 🕰️</p>";
-        } else {
-            history.forEach((record) => {
-                const entry = document.createElement("div");
-                entry.className = "history-record";
+                        const itemsList = record.items
+                            .map(item => `🛍️ ${item.name} - ${item.price} birr`)
+                            .join("<br>");
 
-                const itemsList = record.items
-                    .map(item => `🛍️ ${item.name} - ${item.price} birr`)
-                    .join("<br>");
-
-                entry.innerHTML = `
-                    <p><strong>Date:</strong> ${record.date}</p>
-                    <p><strong>Total:</strong> ${record.total} birr</p>
-                    <div class="history-items-list">${itemsList}</div>
-                    <hr>
-                `;
-                historyContainer.appendChild(entry);
+                        entry.innerHTML = `
+                            <p><strong>Date:</strong> ${record.date}</p>
+                            <p><strong>Total:</strong> ${record.total} birr</p>
+                            <div class="history-items-list">${itemsList}</div>
+                            <hr>
+                        `;
+                        historyContainer.appendChild(entry);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Failed to load history:', error);
+                historyContainer.innerHTML = "<p>Error loading history.</p>";
             });
-        }
     }
 });
 
