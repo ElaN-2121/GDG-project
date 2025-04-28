@@ -19,7 +19,11 @@ nav a{
     color: rgb(255, 203, 221);
     margin: 0 10px;
     text-decoration: none;
-}button {
+}
+.category-list{
+    font-family: 'Courier New', Courier, monospace;
+}
+button {
     background-color: #fff0f6;
     color: #c23b6d;
     border: none;
@@ -44,17 +48,16 @@ html, body {
     flex-direction: column;
 }
 main {
-    flex: 1;}
+    flex: 1;
+}
 .category-list {
     text-align: center;
     margin-top: 50px;
 }
-
 .category-list h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-
 .category-list button {
     font-size: 18px;
     padding: 10px 20px;
@@ -66,12 +69,34 @@ main {
     border-radius: 5px;
     transition: background-color 0.3s;
 }
-
 .category-list button:hover {
     background-color: #e6729d;
     transition: 0.1ms;
 }
-
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 300px;
+}
+.payment-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 400px;
+}
+#cartItems {
+    margin-bottom: 1rem;
+}
+.register-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 300px;
+}
 #product-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

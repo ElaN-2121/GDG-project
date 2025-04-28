@@ -8,8 +8,14 @@ const dataFilePath = path.join(__dirname, 'data', 'purchases.json');
 // Ensure the data folder and file exist
 const ensureDataFile = () => {
     const dir = path.dirname(dataFilePath);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-    if (!fs.existsSync(dataFilePath)) fs.writeFileSync(dataFilePath, '[]');
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir);
+        console.log("Created data directory");
+    }
+    if (!fs.existsSync(dataFilePath)) {
+        fs.writeFileSync(dataFilePath, '[]');
+        console.log("Created empty purchases.json file");
+    }
 };
 
 router.post('/', (req, res) => {

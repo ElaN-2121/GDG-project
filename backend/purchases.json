@@ -1,24 +1,3 @@
 [
-  {
-    "items": [
-      {
-        "name": "Best Shadow Palette",
-        "price": 800,
-        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwT8Xf0hlxH1VeZc9hGX1OvZSQcOKUsOQqOw&s"
-      }
-    ],
-    "total": 800,
-    "date": "2025-04-25T18:12:48.021Z"
-  },
-  {
-    "items": [
-      {
-        "name": "Pink Blush",
-        "price": 400,
-        "image": "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1647459779-screen-shot-2022-03-16-at-3-31-10-pm-1647459758.png?crop=1.00xw:0.997xh;0,0&resize=980:*"
-      }
-    ],
-    "total": 400,
-    "date": "2025-04-25T18:20:26.476Z"
-  }
+    
 ]

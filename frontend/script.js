@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 total += item.price;
             });
 
-            summary.innerHTML = `
+            summary.innerHTML = ` 
                 <h3>Total: <strong>${total} birr</strong></h3>
                 <button class="checkout-btn">Checkout</button>
             `;
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         total: total,
                     };
 
-                    // Send checkout request to the backend
+
                     fetch('http://localhost:5000/api/checkout', {
                         method: 'POST',
                         headers: {
@@ -71,28 +71,43 @@ document.addEventListener("DOMContentLoaded", function () {
                         .then(response => response.json())
                         .then(data => {
                             console.log('Purchase successful:', data);
+                            showCheckoutModal(); 
                         })
                         .catch((error) => {
                             console.error('Error:', error);
+                            showCheckoutModal('Error processing your purchase. Please try again later.');
                         });
                 }
 
-                const modal = document.getElementById("checkout-modal");
-                if (modal) modal.style.display = "flex";
-
-                const audio = document.getElementById("checkout-sound");
-                if (audio) audio.play();
 
                 localStorage.removeItem("cart");
             });
         }
     }
 
+
+    function showCheckoutModal(message = '🎉 Purchase Confirmed! Thank you for shopping with Sheqerqer!') {
+        const modal = document.getElementById("checkout-modal");
+        const modalContent = modal.querySelector(".modal-content");
+
+
+        modalContent.querySelector("h2").textContent = message;
+
+
+        modal.style.display = "flex";
+        
+
+        setTimeout(() => {
+            modal.style.display = "none";  
+            window.location.href = 'index.html';  
+        }, 3000);
+    }
+
     const closeBtn = document.getElementById("close-modal");
     if (closeBtn) {
         closeBtn.addEventListener("click", function () {
             document.getElementById("checkout-modal").style.display = "none";
-            location.reload();
+            window.location.href = 'index.html';  
         });
     }
 
@@ -101,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch('http://localhost:5000/api/purchases')
             .then(response => response.json())
             .then(history => {
+                console.log(history);  
                 if (history.length === 0) {
                     historyContainer.innerHTML = "<p>No past purchases yet 🕰️</p>";
                 } else {
@@ -134,4 +150,9 @@ function removeItem(index) {
     cart.splice(index, 1);
     localStorage.setItem("cart", JSON.stringify(cart));
     location.reload();
+}
+
+if (!localStorage.getItem('registeredEmail')) {
+    alert('You need to log in first!');
+    window.location.href = 'login.html';  
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sheqerqer-HomePage</title>
+    <button id="logoutBtn" style="display: none;">Logout</button>
     <link href="style.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
@@ -16,8 +17,11 @@
             <h1></h1>
             <h1>ሽቅርቅር <span class='english'>Emporium</span></h1>
             <nav>
-                <a href="index.html">Home</a>
-                <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+                <a href="#">Home</a>
+                <a href="cart.html">Cart </a>
+                <a href="history.html">purchase-history </a>
+                <a href="login.html" class="btn btn-primary">Login</a>
+                <a href="registration.html" class="btn btn-secondary">Register</a>
                 
             </nav>
         </header>
@@ -32,9 +36,10 @@
                 <button onclick="window.location.href='shoes.html'">Shoes </button>
                 <button onclick="window.location.href='bags.html'">Bags </button>
                 <button onclick="window.location.href='history.html'">purchase-history </button>
-        
-        
             </section>
+
+
+            
 
         </main>
         
@@ -43,6 +48,9 @@
             <p>&copy; 2025 Sheqerqer</p>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
