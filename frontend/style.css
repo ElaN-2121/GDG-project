@@ -11,9 +11,27 @@ header{
     text-align: center;
     background-attachment: fixed;
     font-family: 'Noto Sans Ethiopic';
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligns content to the left */
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky;
+    display: flex;
+    top: 0;
+    z-index: 1000;
 }
-.logo{
+header img#logo {
+    width: 60px;
+    height: auto;
+    margin-bottom: 10px;
+    margin-right: 20px; /* Adds spacing between logo and text */
+}
+
+#logo{
     border-radius: 50%;
+    left:0;
+    margin:0;
 }
 .english, nav{
     font-family: 'comfortaa', cursive;
@@ -22,6 +40,11 @@ nav a{
     color: rgb(255, 203, 221);
     margin: 0 10px;
     text-decoration: none;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 14px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
 }
 .category-list{
     font-family: 'Courier New', Courier, monospace;
