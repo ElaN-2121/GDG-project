@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const isLoggedIn = localStorage.getItem("loggedIn");
   const registeredEmail = localStorage.getItem("registeredEmail");
 
-  // Redirect if not logged in
   if (!registeredEmail || isLoggedIn !== "true") {
       if (window.location.pathname.includes("cart.html") || window.location.pathname.includes("history.html")) {
           alert("You need to log in first!");
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
   }
 
-  // Logout functionality
   if (logoutBtn) {
       logoutBtn.style.display = "inline-block";
       logoutBtn.addEventListener("click", () => {
@@ -68,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   <img src="${item.image}" alt="${item.name}" class="cart-item-img">
                   <div class="cart-item-details">
                       <h4>${item.name}</h4>
-                      <p>${item.price} Birr</p>
+                      <p>${item.price} </p>
                       <button class="remove-btn" data-index="${index}">Remove</button>
                   </div>
               </div>
@@ -198,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (cartItems.length === 0) {
           cartContainer.innerHTML = "<p>Your cart is empty.</p>";
-          totalElement.textContent = "Total: 0 Birr";
+          totalElement.textContent = "Total: 0 ";
           return;
       }
 
