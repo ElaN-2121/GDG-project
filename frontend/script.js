@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // Render Cart (cart.html only)
+
   function renderCart() {
       if (!cartContainer || !totalElement) return;
 
@@ -87,24 +87,18 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-
-
   checkoutButton.addEventListener("click", () => {
-    // Get cart items from localStorage
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     const total = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
-    // Get the user's email (you could replace this with actual user login data)
-    const registeredEmail = "test@example.com";  // Example email
+    const registeredEmail = "test@example.com";  
 
-    // Prepare purchase data
     const purchaseData = {
         email: registeredEmail,
         items: cartItems,
         total: total.toFixed(2),
     };
 
-    // Send purchase data to the backend
     fetch("http://localhost:5000/checkout", {
         method: "POST",
         headers: {
@@ -116,8 +110,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((data) => {
         if (data.message === "Purchase saved!") {
             alert("Purchase successful!");
-            localStorage.removeItem("cart");  // Clear the cart after successful purchase
-            window.location.href = "history.html";  // Redirect to purchase history page
+            localStorage.removeItem("cart");
+            window.location.href = "history.html";  
         } else {
             alert("Error saving purchase");
         }
@@ -128,12 +122,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-
-
-
-
-  // Show modal after purchase
   function showModal() {
       if (!modal) return;
       modal.style.display = "block";
@@ -142,7 +130,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 3000);
   }
 
-  // Load purchase history (history.html)
   if (window.location.pathname.includes("history.html")) {
       fetch(`${API_BASE_URL}/purchases`)
           .then((response) => response.json())
@@ -173,8 +160,87 @@ document.addEventListener("DOMContentLoaded", function () {
           });
   }
 
-  // Render Cart on cart page load
   if (window.location.pathname.includes("cart.html")) {
       renderCart();
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const API_BASE_URL = "http://localhost:5000/api";
+  const cartContainer = document.getElementById("cartContainer");
+  const totalElement = document.getElementById("total");
+  const checkoutButton = document.getElementById("checkout");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const modal = document.getElementById("modal");
+
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+  const registeredEmail = localStorage.getItem("registeredEmail");
+
+  if (!registeredEmail || !isLoggedIn) {
+      alert("You need to log in first!");
+      window.location.href = "login.html";
+      return;
+  }
+
+  if (logoutBtn) {
+      logoutBtn.style.display = "inline-block";
+      logoutBtn.addEventListener("click", () => {
+          localStorage.setItem("loggedIn", "false");
+          alert("Logged out successfully!");
+          window.location.href = "login.html";
+      });
+  }
+
+  function renderCart() {
+      const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      cartContainer.innerHTML = "";
+      let total = 0;
+
+      if (cartItems.length === 0) {
+          cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+          totalElement.textContent = "Total: 0 Birr";
+          return;
+      }
+
+      cartItems.forEach((item, index) => {
+          const itemElement = document.createElement("div");
+          itemElement.innerHTML = `
+              <div class="cart-item">
+                  <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                  <div class="cart-item-details">
+                      <h4>${item.name}</h4>
+                      <p>${item.price} Birr</p>
+                      <button class="remove-btn" data-index="${index}">Remove</button>
+                  </div>
+              </div>
+          `;
+          cartContainer.appendChild(itemElement);
+          total += parseFloat(item.price);
+      });
+
+      totalElement.textContent = `Total: ${total.toFixed(2)} Birr`;
+
+      document.querySelectorAll(".remove-btn").forEach((button) => {
+          button.addEventListener("click", () => {
+              const index = parseInt(button.dataset.index);
+              removeItem(index);
+          });
+      });
+  }
+
+  function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+  }
+
+  if (checkoutButton) {
+      checkoutButton.addEventListener("click", () => {
+          console.log("Checkout button clicked!");
+          handleCheckout();
+      });
+  }
+
+  renderCart();
 });
