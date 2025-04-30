@@ -12,6 +12,9 @@ header{
     background-attachment: fixed;
     font-family: 'Noto Sans Ethiopic';
 }
+.logo{
+    border-radius: 50%;
+}
 .english, nav{
     font-family: 'comfortaa', cursive;
 }

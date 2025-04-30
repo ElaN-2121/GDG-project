@@ -1,3 +1,4 @@
+<!-- cart.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,24 +16,28 @@
                 <a href="index.html">Home</a>
                 <a href="hairAndcosmetics.html">Hair & Cosmetics</a>
                 <a href="clothes.html">Clothes</a>
-                <a href="shoes.html">Shoes </a>
-                <a href="bags.html">Bags </a>
-                <a href="history.html">purchase-history </a>
+                <a href="shoes.html">Shoes</a>
+                <a href="bags.html">Bags</a>
+                <a href="history.html">Purchase History</a>
+                <button id="logoutBtn" style="display:none; margin-left: 10px">Logout</button>
             </nav>
         </header>
 
         <main>
             <section id="cart-items">
                 <h2>Items in Your Cart</h2>
-                <div class="cart-item"></div>
+                <div id="cartContainer"></div>
+                <p id="total">Total: 0 Birr</p>
+                <button id="checkout">Checkout</button>
+            </section>
 
-                <div id="checkout-modal" class="modal">
-                    <div class="modal-content">
-                        <h2>🎉 Purchase Confirmed!</h2>
-                        <p>Thank you for shopping with Sheqerqer!</p>
-                        <button id="close-modal">Close</button>
-                    </div>
+            <div id="modal" class="modal" style="display:none">
+                <div class="modal-content">
+                    <h2>🎉 Purchase Confirmed!</h2>
+                    <p>Thank you for shopping with Sheqerqer!</p>
+                    <button id="close-modal">Close</button>
                 </div>
+            </div>
         </main>
 
         <footer>

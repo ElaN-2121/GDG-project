@@ -24,7 +24,6 @@
     </style>
 </head>
 <body>
-
     <div class="login-container">
         <h2 class="text-center">Login</h2>
         <form id="loginForm">
@@ -41,10 +40,24 @@
         </form>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="login.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
+            const enteredEmail = document.getElementById('loginEmail').value;
+            const enteredPassword = document.getElementById('loginPassword').value;
+
+            const storedEmail = localStorage.getItem('registeredEmail');
+            const storedPassword = localStorage.getItem('registeredPassword');
+
+            if (enteredEmail === storedEmail && enteredPassword === storedPassword) {
+                localStorage.setItem('loggedIn', 'true');
+                alert('Login successful!');
+                window.location.href = 'index.html';
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+    </script>
 </body>
 </html>

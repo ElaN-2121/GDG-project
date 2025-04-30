@@ -1,56 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sheqerqer-HomePage</title>
-    <button id="logoutBtn" style="display: none;">Logout</button>
-    <link href="style.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Sheqerqer - HomePage</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic&family=Comfortaa:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Comfortaa', cursive;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #fff;
+    }
+
+    header img.logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-family: 'Noto Sans Ethiopic', sans-serif;
+    }
+
+    .english {
+      font-family: 'Comfortaa', cursive;
+    }
+
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background-color: #f06292;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(240, 98, 146, 0.3);
+    }
+
+    #logoutBtn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      padding: 8px 14px;
+      background-color: #ec407a;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      display: none;
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 40px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .category-list h2, .about h2, .trending h2, .contact h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #ad1457;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .category-card {
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 20px;
+      width: 160px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .category-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .category-card button {
+      background-color: #f48fb1;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+
+    .category-card button:hover {
+      background-color: #d81b60;
+    }
+
+    .about, .trending, .contact {
+      padding: 40px 20px;
+      background-color: #fce4ec;
+      margin: 40px 0;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .category-card {
+        width: 120px;
+        padding: 15px;
+      }
+
+      .category-card img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 
-
 <body>
-    <div class="wrapper">
-        <header>
-            <h1></h1>
-            <h1>ሽቅርቅር <span class='english'>Emporium</span></h1>
-            <nav>
-                <a href="#">Home</a>
-                <a href="cart.html">Cart </a>
-                <a href="history.html">purchase-history </a>
-                <a href="login.html" class="btn btn-primary">Login</a>
-                <a href="registration.html" class="btn btn-secondary">Register</a>
-                
-            </nav>
-        </header>
-    
+  <div class="wrapper">
+    <button id="logoutBtn">Logout</button>
 
-        <main>
-            <section class="category-list">
-                <h2>Choose a Section</h2>
-                <button onclick="window.location.href='hairAndcosmetics.html'">Hair and cosmetics</button>
-                <button onclick="window.location.href='clothes.html'">Clothes</button>
-                <button onclick="window.location.href='jewels.html'">Jewelry </button>
-                <button onclick="window.location.href='shoes.html'">Shoes </button>
-                <button onclick="window.location.href='bags.html'">Bags </button>
-                <button onclick="window.location.href='history.html'">purchase-history </button>
-            </section>
+    <header>
+      <img src="https://cdn2.vectorstock.com/i/1000x1000/81/96/s-letter-woman-girl-face-beauty-product-skin-logo-vector-44298196.jpg" alt="Sheqerqer Logo" class="logo"/> <!-- Replace with your actual logo -->
+      <h1>ሽቅርቅር <span class="english">Emporium</span></h1>
+      <nav>
+        <a href="#">🏠 Home</a>
+        <a href="cart.html">🛒 Cart</a>
+        <a href="history.html">📜 History</a>
+        <a href="login.html">🔐 Login</a>
+        <a href="registration.html">📝 Register</a>
+      </nav>
+    </header>
 
+    <main>
+      <section class="category-list">
+        <h2>🛍️ Choose a Section</h2>
+        <div class="category-container">
+          <div class="category-card fade-in-up">
+            <img src="https://img.freepik.com/premium-vector/beautiful-girl-with-red-hair-cosmetics-hand-drawn-vector-illustration_1057-177250.jpg" alt="Hair & Cosmetics"/>
+            <button onclick="location.href='hairAndcosmetics.html'">💄 Hair & Cosmetics</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://thumbs.dreamstime.com/b/colored-clothes-apparel-hanging-hangers-garment-rack-rail-isolated-white-background-clothing-organization-storage-inner-120845037.jpg" alt="Clothes"/>
+            <button onclick="location.href='clothes.html'">👗 Clothes</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://media.istockphoto.com/id/1446745631/vector/cartoon-gold-and-silver-jewelry-precious-diamond-necklace-golden-earrings-pearl-pendant.jpg?s=612x612&w=0&k=20&c=pA7_W_8Ep-CJzIOGlNO_WAcKM2HVyPN8IDzoT2ULJ1s=" alt="Jewelry"/>
+            <button onclick="location.href='jewels.html'">💍 Jewelry</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://img.freepik.com/free-vector/front-side-view-female-shoes-vector-illustrations-set_778687-1264.jpg?semt=ais_hybrid&w=740" alt="Shoes"/>
+            <button onclick="location.href='shoes.html'">👠 Shoes</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://www.shutterstock.com/shutterstock/photos/1966878925/display_1500/stock-vector-ladies-handbag-set-of-fashion-accessories-seamless-vector-pattern-background-cartoon-print-1966878925.jpg" alt="Bags"/>
+            <button onclick="location.href='bags.html'">👜 Bags</button>
+          </div>
+        </div>
+      </section>
 
-            
+      <!-- About Section -->
+      <section class="about">
+        <h2>About Sheqerqer Emporium</h2>
+        <p>Welcome to Sheqerqer! We specialize in offering stylish, trendy, and unique items that cater to all your fashion needs. Whether you're looking for cosmetics, jewelry, or clothing, we've got you covered!</p>
+      </section>
 
-        </main>
-        
-    
-        <footer>
-            <p>&copy; 2025 Sheqerqer</p>
-        </footer>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
+      <!-- Trending Section -->
+      <section class="trending">
+        <h2>🌟 Trending Now</h2>
+        <div class="category-container">
+          <div class="category-card fade-in-up">
+            <img src="https://m.media-amazon.com/images/I/715RFBbCQYL._AC_UY1000_.jpg" alt="Trending 1"/>
+            <button onclick="location.href='jewels.html'">🛒 Shop Now</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://i5.walmartimages.com/asr/8df5e01c-463a-4eee-81b4-4955cc7af804.7e281c6a6bdb8c00a13308e325ac1e4a.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF" alt="Trending 2"/>
+            <button onclick="location.href='clothes.html'">🛒 Shop Now</button>
+          </div>
+          <div class="category-card fade-in-up">
+            <img src="https://i.pinimg.com/474x/07/51/4e/07514e8898539267d3c2434407deeeaa.jpg" alt="Trending 3"/>
+            <button onclick="location.href='shoes.html'">🛒 Shop Now</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact">
+        <h2>📞 Contact Us</h2>
+        <p>Have any questions? Reach out to us at <strong>info@sheqerqer.com</strong> or call us at <strong>+251 9xxx xxx xxx</strong>.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Sheqerqer Emporium. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

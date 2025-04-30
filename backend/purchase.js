@@ -5,7 +5,6 @@ const path = require('path');
 const router = express.Router();
 const dataFilePath = path.join(__dirname, 'data', 'purchases.json');
 
-// Ensure the data folder and file exist
 const ensureDataFile = () => {
     const dir = path.dirname(dataFilePath);
     if (!fs.existsSync(dir)) {
